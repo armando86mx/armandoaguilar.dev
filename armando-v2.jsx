@@ -308,7 +308,9 @@ function App() {
 
   return (
     <div className="bp">
-      <style>{CSS}</style>
+      {/* dangerouslySetInnerHTML: evita que React escape las comillas del CSS
+          (content:"" → content:&quot;) y el consecuente desajuste de hidratación. */}
+      <style dangerouslySetInnerHTML={{ __html: CSS }} />
       <div className="bp-grid" />
       <div className="bp-frame" />
       <nav className={`bp-nav ${scrolled ? "scrolled" : ""}`}>

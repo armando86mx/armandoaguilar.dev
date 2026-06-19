@@ -372,7 +372,11 @@ function App() {
   const secCoord = i => "X:" + String(i * 240).padStart(4, "0") + " · Y:" + String(i * 160).padStart(4, "0");
   return /*#__PURE__*/React.createElement("div", {
     className: "bp"
-  }, /*#__PURE__*/React.createElement("style", null, CSS), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("style", {
+    dangerouslySetInnerHTML: {
+      __html: CSS
+    }
+  }), /*#__PURE__*/React.createElement("div", {
     className: "bp-grid"
   }), /*#__PURE__*/React.createElement("div", {
     className: "bp-frame"
