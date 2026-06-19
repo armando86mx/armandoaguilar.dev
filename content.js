@@ -227,7 +227,7 @@ window.CONTENT = {
     bannerLabel: { es: "Certificaciones AWS · completadas", en: "AWS certifications · completed" },
     items: [
       { name: "AWS Cloud Solutions Architect", issuer: "Coursera · AWS", note: { es: "Completado · 4 cursos · arquitectura de soluciones en la nube", en: "Completed · 4 courses · cloud solutions architecture" }, done: true, featured: true, link: "https://coursera.org/verify/professional-cert/E5CMG00KYTRP" },
-      { name: "AWS Fundamentals", issuer: "Coursera · AWS", note: { es: "Completado · 3 cursos · fundamentos de AWS", en: "Completed · 3 courses · AWS fundamentals" }, done: true, featured: true, link: "https://coursera.org/verify/specialization/7OOXO00X45J6" },
+      { name: "AWS Fundamentals", issuer: "Coursera · AWS", note: { es: "Completado · 3 cursos · fundamentos de AWS", en: "Completed · 3 courses · AWS fundamentals" }, done: true, featured: true, link: "https://coursera.org/verify/specialization/7OOXO00X4SJ6" },
     ],
     note: { es: "Y más de 50 cursos completados en Platzi, Coursera y Udemy.", en: "Plus 50+ completed courses on Platzi, Coursera, and Udemy." },
   },
