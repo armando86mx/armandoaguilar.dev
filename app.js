@@ -86,6 +86,9 @@ const CSS = `
 .bp-tg { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); border: 1px solid var(--line); background: transparent; padding: 7px 10px; cursor: pointer; transition: .2s; }
 .bp-tg:hover { border-color: var(--acc); color: var(--fg); }
 .bp-tg .on { color: var(--acc); }
+.bp-tg-theme .ic-sun { display: none; }
+html[data-theme="light"] .bp-tg-theme .ic-moon { display: none; }
+html[data-theme="light"] .bp-tg-theme .ic-sun { display: inline; }
 .bp-burger { display: none; font-family: var(--mono); font-size: 15px; line-height: 1; color: var(--fg-dim); border: 1px solid var(--line); background: transparent; padding: 8px 11px; cursor: pointer; transition: .2s; }
 .bp-burger:hover { border-color: var(--acc); color: var(--fg); }
 .bp-mobnav { display: none; }
@@ -408,10 +411,14 @@ function App() {
   }, "ES"), "/", /*#__PURE__*/React.createElement("span", {
     className: lang === "en" ? "on" : ""
   }, "EN")), /*#__PURE__*/React.createElement("button", {
-    className: "bp-tg",
+    className: "bp-tg bp-tg-theme",
     onClick: () => setTheme(theme === "dark" ? "light" : "dark"),
-    "aria-label": lang === "es" ? theme === "dark" ? "Activar modo claro" : "Activar modo oscuro" : theme === "dark" ? "Switch to light mode" : "Switch to dark mode"
-  }, theme === "dark" ? "☾" : "☀"), /*#__PURE__*/React.createElement("button", {
+    "aria-label": lang === "es" ? "Cambiar tema" : "Toggle theme"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "ic-moon"
+  }, "\u263E"), /*#__PURE__*/React.createElement("span", {
+    className: "ic-sun"
+  }, "\u2600")), /*#__PURE__*/React.createElement("button", {
     className: "bp-burger",
     onClick: () => setMenuOpen(o => !o),
     "aria-label": lang === "es" ? "Menú" : "Menu",
