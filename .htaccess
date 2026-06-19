@@ -1,0 +1,26 @@
+# ============================================================
+#  Seguridad — cabeceras HTTP (LiteSpeed / Apache)
+# ============================================================
+<IfModule mod_headers.c>
+  # Forzar HTTPS en visitas futuras del navegador
+  Header always set Strict-Transport-Security "max-age=31536000"
+  # No adivinar el tipo de contenido (evita ataques por MIME-sniffing)
+  Header always set X-Content-Type-Options "nosniff"
+  # Anti-clickjacking: nadie puede embeber el sitio en un iframe ajeno
+  Header always set X-Frame-Options "SAMEORIGIN"
+  # No filtrar la URL completa como referer a sitios externos
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  # Apagar APIs del navegador que el sitio no usa
+  Header always set Permissions-Policy "geolocation=(), camera=(), microphone=(), payment=(), usb=()"
+  # Content-Security-Policy: solo permite recursos propios + Google Analytics + Microsoft Clarity
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' https://www.googletagmanager.com https://www.clarity.ms https://*.clarity.ms; style-src 'self' 'unsafe-inline'; font-src 'self'; img-src 'self' data: https://*.google-analytics.com https://*.googletagmanager.com https://*.clarity.ms https://c.bing.com; connect-src 'self' https://*.google-analytics.com https://*.googletagmanager.com https://www.google-analytics.com https://*.clarity.ms https://c.bing.com; worker-src 'self' blob:; frame-ancestors 'self'; base-uri 'self'; object-src 'none'"
+</IfModule>
+
+# ============================================================
+#  Higiene — no servir archivos de desarrollo/fuente
+#  (no contienen secretos, pero no pintan en producción:
+#   los .jsx fuente, package.json, package-lock.json, README.md)
+# ============================================================
+<FilesMatch "\.(jsx|json|md)$">
+  Require all denied
+</FilesMatch>
