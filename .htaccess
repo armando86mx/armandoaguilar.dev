@@ -33,3 +33,8 @@
 <FilesMatch "\.(jsx|json|md)$">
   Require all denied
 </FilesMatch>
+
+# ============================================================
+#  Página 404 personalizada
+# ============================================================
+ErrorDocument 404 /404.html
