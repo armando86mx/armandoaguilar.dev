@@ -70,9 +70,9 @@ const CSS = `
 .bp-shell { max-width: 1200px; margin: 0 auto; padding-inline: clamp(20px,5vw,72px); }
 
 /* nav */
-.bp-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; transition: .35s; }
+.bp-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; border-bottom: 1px solid transparent; transition: background .35s ease, backdrop-filter .35s ease, border-color .35s ease; }
 .bp-nav-in { max-width: 1200px; margin: 0 auto; padding: 16px clamp(24px,5vw,72px); display: flex; align-items: center; justify-content: space-between; }
-.bp-nav.scrolled { background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(10px); border-bottom: 1px solid var(--line); }
+.bp-nav.scrolled { background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(10px); border-bottom-color: var(--line); }
 .bp-mark { font-family: var(--mono); font-size: 13.5px; letter-spacing: .5px; display: flex; align-items: center; gap: 9px; white-space: nowrap; }
 .bp-mark .pin { width: 9px; height: 9px; border: 1.5px solid var(--acc); border-radius: 50%; position: relative; }
 .bp-mark .pin::after { content:""; position: absolute; inset: 2px; background: var(--acc); border-radius: 50%; }
