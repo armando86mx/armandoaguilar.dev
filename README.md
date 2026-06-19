@@ -14,6 +14,7 @@ React precompilado a JS plano: **no usa Babel en el navegador** y no depende de 
 | `carousel.jsx` | Fuente React del carrusel de imágenes. |
 | `app.js`, `carousel.js` | **Generados** a partir de los `.jsx`. No los edites a mano. |
 | `base.css` | Estilos base/tema (variables, reset, body). Compartido por ambas páginas. |
+| `analytics.js` | Google Analytics (GA4) + Microsoft Clarity. Los IDs viven aquí. |
 | `vendor/` | React y ReactDOM (build de producción), servidos localmente. |
 | `fonts/` | Tipografías autohospedadas (Space Grotesk, IBM Plex Mono) en WOFF2. |
 | `assets/` | Imágenes en WebP. Originales en `assets/_originals/` (ignorado por git). |
@@ -53,7 +54,7 @@ python3 -m http.server 8000
 
 Sube **todo** el contenido de la carpeta a `public_html/` (Git, File Manager o FTP),
 **incluida la subcarpeta `en/`**. Necesario en el servidor: `index.html`, `en/index.html`,
-`base.css`, `content.js`, `app.js`, `carousel.js`, `favicon.svg`, `og-image.png`,
+`base.css`, `analytics.js`, `content.js`, `app.js`, `carousel.js`, `favicon.svg`, `og-image.png`,
 `og-image-en.png`, `robots.txt`, `sitemap.xml`, `vendor/`, `fonts/` y `assets/`. **No subas** `node_modules/` ni
 `assets/_originals/` (ya están en `.gitignore`). Los `.jsx`, `package.json` y
 `package-lock.json` no son necesarios en producción, pero no estorban.
@@ -62,3 +63,4 @@ Sube **todo** el contenido de la carpeta a `public_html/` (Git, File Manager o F
 
 - Las tipografías (Space Grotesk, IBM Plex Mono) están **autohospedadas** en `fonts/` (WOFF2, con `@font-face` en `base.css`). El sitio **no tiene dependencias externas en runtime**.
 - Tras el despliegue, envía el `sitemap.xml` en Google Search Console.
+- Analítica: Google Analytics (GA4) y Microsoft Clarity, ambos en `analytics.js` (sin banner de consentimiento). Tras desplegar, confírmalos en **GA → Tiempo real** y en el panel de **Clarity** (las sesiones tardan unos minutos en aparecer).
