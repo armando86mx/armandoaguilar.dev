@@ -139,7 +139,7 @@ const CSS = `
 .bp-photo-bar i:nth-child(1){ background: var(--acc); }
 .bp-photo-bar i:nth-child(2){ background: color-mix(in srgb,var(--acc) 55%, var(--fg-faint)); }
 .bp-photo-bar i:nth-child(3){ background: var(--fg-faint); }
-.bp-photo-bar span { font-family: var(--mono); font-size: 11.5px; color: var(--fg-faint); margin-left: 6px; white-space: nowrap; }
+.bp-photo-bar span { font-family: var(--mono); font-size: 11.5px; color: var(--fg-dim); margin-left: 6px; white-space: nowrap; }
 .bp-photo-img { position: relative; aspect-ratio: 4/4.5; overflow: hidden; }
 .bp-photo-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; filter: grayscale(.2) contrast(1.03) saturate(.9); }
 .bp-photo-img::after { content:""; position:absolute; inset:0; pointer-events: none; box-shadow: inset 0 0 0 1px var(--acc-soft);
