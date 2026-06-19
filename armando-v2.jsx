@@ -462,4 +462,14 @@ function App() {
   );
 }
 
-ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+// Cliente: hidrata el HTML prerenderizado; si #root está vacío (dev local sin
+// build), monta normal. Servidor (prerender.mjs): expone App, sin tocar el DOM.
+if (typeof document !== "undefined") {
+  const __root = document.getElementById("root");
+  if (__root) {
+    __root.firstChild
+      ? ReactDOM.hydrateRoot(__root, <App />)
+      : ReactDOM.createRoot(__root).render(<App />);
+  }
+}
+if (typeof globalThis !== "undefined") globalThis.__App = App;

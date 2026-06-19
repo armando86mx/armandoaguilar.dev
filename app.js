@@ -708,4 +708,13 @@ function App() {
     rel: "noopener"
   }, "LinkedIn \u2197"))));
 }
-ReactDOM.createRoot(document.getElementById("root")).render(/*#__PURE__*/React.createElement(App, null));
+
+// Cliente: hidrata el HTML prerenderizado; si #root está vacío (dev local sin
+// build), monta normal. Servidor (prerender.mjs): expone App, sin tocar el DOM.
+if (typeof document !== "undefined") {
+  const __root = document.getElementById("root");
+  if (__root) {
+    __root.firstChild ? ReactDOM.hydrateRoot(__root, /*#__PURE__*/React.createElement(App, null)) : ReactDOM.createRoot(__root).render(/*#__PURE__*/React.createElement(App, null));
+  }
+}
+if (typeof globalThis !== "undefined") globalThis.__App = App;

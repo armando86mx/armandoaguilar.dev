@@ -69,7 +69,228 @@
 </script>
 </head>
 <body>
-<div id="root"></div>
+<div id="root"><div class="bp"><style>
+.bp { position: relative; min-height: 100vh; }
+.bp-grid { position: fixed; inset: 0; z-index: 0; pointer-events: none;
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px),
+    linear-gradient(var(--grid-2) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-2) 1px, transparent 1px);
+  background-size: 28px 28px, 28px 28px, 140px 140px, 140px 140px; }
+.bp-frame { position: fixed; inset: 14px; z-index: 0; pointer-events: none; border: 1px solid var(--line); }
+.bp-frame::before, .bp-frame::after { content:&quot;&quot;; position: absolute; width: 11px; height: 11px; border: 1px solid var(--acc); }
+.bp-frame::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.bp-frame::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+.bp-main { position: relative; z-index: 2; }
+.bp-shell { max-width: 1200px; margin: 0 auto; padding-inline: clamp(20px,5vw,72px); }
+
+/* nav */
+.bp-nav { position: fixed; top: 0; left: 0; right: 0; z-index: 50; border-bottom: 1px solid transparent; transition: background .35s ease, backdrop-filter .35s ease, border-color .35s ease; }
+.bp-nav-in { max-width: 1200px; margin: 0 auto; padding: 16px clamp(24px,5vw,72px); display: flex; align-items: center; justify-content: space-between; }
+.bp-nav.scrolled { background: color-mix(in srgb, var(--bg) 84%, transparent); backdrop-filter: blur(10px); border-bottom-color: var(--line); }
+.bp-mark { font-family: var(--mono); font-size: 13.5px; letter-spacing: .5px; display: flex; align-items: center; gap: 9px; white-space: nowrap; }
+.bp-mark .pin { width: 9px; height: 9px; border: 1.5px solid var(--acc); border-radius: 50%; position: relative; }
+.bp-mark .pin::after { content:&quot;&quot;; position: absolute; inset: 2px; background: var(--acc); border-radius: 50%; }
+.bp-mark b { color: var(--acc); font-weight: 500; }
+@media (max-width: 400px){ .bp-mark-suf { display: none; } }
+.bp-navlinks { display: flex; gap: 3px; }
+.bp-navlink { font-family: var(--mono); font-size: 12px; letter-spacing: .3px; color: var(--fg-dim); padding: 7px 12px; transition: .2s; white-space: nowrap; }
+.bp-navlink:hover { color: var(--fg); }
+.bp-navlink.active { color: var(--acc); }
+.bp-ctrls { display: flex; gap: 8px; }
+.bp-tg { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); border: 1px solid var(--line); background: transparent; padding: 7px 10px; cursor: pointer; transition: .2s; }
+.bp-tg:hover { border-color: var(--acc); color: var(--fg); }
+.bp-tg .on { color: var(--acc); }
+.bp-burger { display: none; font-family: var(--mono); font-size: 15px; line-height: 1; color: var(--fg-dim); border: 1px solid var(--line); background: transparent; padding: 8px 11px; cursor: pointer; transition: .2s; }
+.bp-burger:hover { border-color: var(--acc); color: var(--fg); }
+.bp-mobnav { display: none; }
+@media (max-width: 880px){
+  .bp-navlinks { display: none; }
+  .bp-burger { display: inline-flex; align-items: center; justify-content: center; }
+  .bp-mobnav.open { display: flex; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; z-index: 49;
+    padding: 70px clamp(20px,5vw,72px) 22px; background: color-mix(in srgb, var(--bg) 95%, transparent);
+    backdrop-filter: blur(12px); border-bottom: 1px solid var(--line); animation: bpmob .22s ease; }
+  .bp-mobnav.open a { font-family: var(--mono); font-size: 15px; color: var(--fg-dim); letter-spacing: .3px;
+    padding: 15px 2px; border-bottom: 1px solid var(--line-2); transition: color .2s; }
+  .bp-mobnav.open a:last-child { border-bottom: 0; }
+  .bp-mobnav.open a.active { color: var(--acc); }
+}
+@keyframes bpmob { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: none; } }
+
+/* section header */
+.bp-section { padding-block: clamp(72px,11vh,128px); position: relative; }
+.bp-sechead { display: flex; align-items: center; gap: 14px; margin-bottom: 48px; }
+.bp-cross { width: 18px; height: 18px; position: relative; flex-shrink: 0; }
+.bp-cross::before, .bp-cross::after { content:&quot;&quot;; position: absolute; background: var(--acc); }
+.bp-cross::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
+.bp-cross::after { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
+.bp-sechead .sec { font-family: var(--mono); font-size: 12px; color: var(--acc); letter-spacing: 1px; }
+.bp-sechead .ttl { font-family: var(--mono); font-size: 12px; font-weight: 400; color: var(--fg-dim); letter-spacing: 2px; text-transform: uppercase; }
+.bp-sechead .rule { flex: 1; height: 1px; background: var(--line); }
+.bp-sechead .coord { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); }
+
+/* hero */
+.bp-hero { padding-block: clamp(74px,9vh,116px) clamp(48px,7vh,84px); }
+.bp-kicker { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); letter-spacing: .4px; margin-bottom: 26px; display: flex; align-items: center; gap: 11px; }
+.bp-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--acc); animation: bppulse 2.2s infinite; flex-shrink: 0; }
+@keyframes bppulse { 0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--acc) 55%,transparent);} 70%{box-shadow:0 0 0 9px transparent;} 100%{box-shadow:0 0 0 0 transparent;} }
+.bp-hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; gap: clamp(34px,5vw,64px); align-items: center; }
+.bp-headline { font-size: clamp(40px,6.6vw,86px); font-weight: 600; line-height: 1.0; letter-spacing: -.025em; }
+.bp-headline .em { color: var(--acc); position: relative; }
+.bp-headline .br { display: block; }
+.bp-sub { color: var(--fg-dim); font-size: clamp(15px,1.5vw,18px); max-width: 48ch; margin-top: 22px; }
+.bp-role { font-family: var(--mono); font-size: 13px; color: var(--fg); margin-top: 22px; padding-left: 14px; border-left: 2px solid var(--acc); line-height: 1.5; }
+.bp-cta { display: flex; gap: 13px; margin-top: 28px; flex-wrap: wrap; }
+.bp-btn { font-family: var(--mono); font-size: 13px; padding: 13px 22px; cursor: pointer; transition: .22s; border: 1px solid var(--acc); background: var(--acc); color: var(--bg); font-weight: 500; display: inline-flex; gap: 8px; align-items: center; }
+.bp-btn:hover { transform: translateY(-2px); box-shadow: 0 10px 26px -12px var(--acc); }
+.bp-btn.ghost { background: transparent; color: var(--fg); border-color: var(--line); }
+.bp-btn.ghost:hover { border-color: var(--acc); color: var(--acc); box-shadow: none; }
+
+/* hero photo — Mac window */
+.bp-hero-right { display: flex; flex-direction: column; }
+.bp-photo-card { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--panel); box-shadow: 0 30px 70px -42px #000; }
+.bp-photo-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); }
+.bp-photo-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
+.bp-photo-bar i:nth-child(1){ background: var(--acc); }
+.bp-photo-bar i:nth-child(2){ background: color-mix(in srgb,var(--acc) 55%, var(--fg-faint)); }
+.bp-photo-bar i:nth-child(3){ background: var(--fg-faint); }
+.bp-photo-bar span { font-family: var(--mono); font-size: 11.5px; color: var(--fg-dim); margin-left: 6px; white-space: nowrap; }
+.bp-photo-img { position: relative; aspect-ratio: 4/4.5; overflow: hidden; }
+.bp-photo-img img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 16%; filter: grayscale(.2) contrast(1.03) saturate(.9); }
+.bp-photo-img::after { content:&quot;&quot;; position:absolute; inset:0; pointer-events: none; box-shadow: inset 0 0 0 1px var(--acc-soft);
+  background: linear-gradient(180deg, transparent 50%, color-mix(in srgb,var(--panel) 80%, transparent)); }
+.bp-photo-meta { position:absolute; z-index: 4; bottom: 15px; left: 15px; right: 15px; font-family: var(--mono); font-size: 12px; color: var(--fg); display: flex; align-items: center; }
+.bp-photo-meta .who { display: inline-flex; align-items: center; gap: 9px; padding-left: 18px; white-space: nowrap; text-shadow: 0 1px 7px var(--panel), 0 0 2px var(--panel); }
+.bp-photo-meta b { color: var(--acc); font-size: 13px; line-height: 1; }
+.bp-social { display: flex; gap: 13px; justify-content: center; align-items: center; margin-top: 18px; }
+.bp-soc { font-family: var(--mono); font-size: 13px; border: 1px solid var(--line); padding: 13px 22px; display: inline-flex; align-items: center; gap: 8px; transition: .22s; background: transparent; color: var(--fg); }
+.bp-soc span { color: var(--acc); transition: .22s; }
+.bp-soc.gh:hover { border-color: var(--acc); color: var(--acc); transform: translateY(-2px); }
+.bp-soc.li { background: #0a66c2; border-color: #0a66c2; color: #fff; }
+.bp-soc.li span { color: #fff; }
+.bp-soc.li:hover { background: #084e96; border-color: #084e96; transform: translateY(-2px); }
+
+/* analytic */
+.bp-analytic-lead { font-size: clamp(20px,2.6vw,31px); line-height: 1.36; font-weight: 500; max-width: 30ch; letter-spacing: -.01em; }
+.bp-analytic-lead .hl { color: var(--acc); }
+.bp-cols { display: grid; grid-template-columns: repeat(3,1fr); margin-top: 54px; border: 1px solid var(--line); }
+.bp-col { padding: 28px 26px; border-right: 1px solid var(--line); position: relative; transition: background .25s; }
+.bp-col:last-child { border-right: 0; }
+.bp-col:hover { background: var(--acc-soft); }
+.bp-col .idx { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); position: absolute; top: 12px; right: 14px; }
+.bp-col h3 { font-family: var(--mono); font-size: 14px; color: var(--acc); margin-bottom: 14px; letter-spacing: .4px; }
+.bp-col p { color: var(--fg-dim); font-size: 14.5px; }
+
+/* projects — alternating feature */
+.bp-feat { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(30px,5vw,64px); padding: clamp(44px,7vh,84px) 0; border-top: 1px solid var(--line); align-items: center; }
+.bp-feat:first-of-type { border-top: 0; padding-top: 0; }
+.bp-feat.flip .bp-feat-media { order: -1; }
+.bp-feat-area { font-family: var(--mono); font-size: 12px; letter-spacing: .1em; text-transform: uppercase; color: var(--acc); margin-bottom: 18px; }
+.bp-feat-title { font-size: clamp(26px,3.3vw,44px); font-weight: 600; line-height: 1.04; letter-spacing: -.02em; margin-bottom: 18px; }
+.bp-feat-name { font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 24px; }
+.bp-feat-body p { color: var(--fg-dim); margin-bottom: 16px; font-size: 15px; }
+.bp-feat-body p.res { color: var(--fg); }
+.bp-feat-body .lbl { display: block; font-family: var(--mono); font-size: 10.5px; letter-spacing: 1px; text-transform: uppercase; color: var(--fg-faint); margin-bottom: 5px; }
+.bp-feat-body p.res .lbl { color: var(--acc); }
+.bp-feat-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.bp-feat-tags span { font-family: var(--mono); font-size: 11.5px; color: var(--fg-dim); border: 1px solid var(--line); padding: 5px 11px; }
+.bp-feat-ai { font-family: var(--mono); font-size: 11.5px; color: var(--acc); margin-top: 16px; display: flex; gap: 7px; align-items: center; }
+.bp-feat-ai::before { content:&quot;⌖&quot;; }
+.bp-pbtns { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+.bp-pbtn { font-family: var(--mono); font-size: 12.5px; padding: 12px 18px; cursor: pointer; transition: .22s; display: inline-flex; align-items: center; gap: 8px; border: 1px solid var(--line); background: transparent; color: var(--fg); }
+.bp-pbtn:hover { border-color: var(--acc); color: var(--acc); transform: translateY(-2px); }
+.bp-pbtn.primary { background: var(--acc); color: var(--bg); border-color: var(--acc); }
+.bp-pbtn.primary:hover { color: var(--bg); box-shadow: 0 12px 26px -12px var(--acc); }
+.bp-pbtn.soon { opacity: .7; cursor: default; }
+.bp-pbtn.soon:hover { transform: none; border-color: var(--line); color: var(--fg); }
+.bp-pbtn .s { color: var(--fg-faint); }
+.bp-feat-media { position: relative; }
+.bp-media-frame { border: 1px solid var(--line); background: var(--panel); overflow: hidden; position: relative; }
+.bp-media-frame img { width: 100%; height: auto; display: block; }
+.bp-media-frame .tag { position: absolute; top: 11px; left: 11px; z-index: 3; font-family: var(--mono); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; background: var(--acc); color: var(--bg); padding: 4px 9px; }
+
+/* about */
+.bp-about { display: grid; grid-template-columns: 1fr .85fr; gap: clamp(32px,5vw,64px); }
+.bp-about p { font-size: clamp(16px,1.7vw,19px); color: var(--fg-dim); margin-bottom: 20px; max-width: 52ch; }
+.bp-about p:first-of-type { color: var(--fg); }
+.bp-card { border: 1px solid var(--line); background: var(--panel); padding: 24px; margin-bottom: 24px; }
+.bp-card h3 { font-family: var(--mono); font-size: 12px; color: var(--acc); letter-spacing: .6px; margin-bottom: 16px; text-transform: uppercase; }
+.bp-langrow { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line-2); font-size: 15px; }
+.bp-langrow:last-child { border-bottom: 0; }
+.bp-langrow span { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); }
+.bp-edu-item { padding: 14px 0; border-bottom: 1px solid var(--line-2); }
+.bp-edu-item:last-child { border-bottom: 0; }
+.bp-edu-item h4 { font-size: 14.5px; font-weight: 600; }
+.bp-edu-item .d { font-size: 13px; color: var(--fg-dim); margin: 4px 0; }
+.bp-edu-item .y { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); margin-bottom: 8px; }
+.bp-edu-item .desc { font-size: 13.5px; color: var(--fg-dim); border-top: 1px solid var(--line-2); padding-top: 10px; margin-top: 4px; }
+.bp-photo-slot { border: 1px solid var(--line); aspect-ratio: 3/2.4; display: grid; place-items: center; margin-bottom: 24px; overflow: hidden; }
+.bp-photo-slot img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; }
+.reveal.bp-about-aside { display: flex; }
+.bp-about-aside-in { display: flex; flex-direction: column; width: 100%; flex: 1; }
+.bp-about-aside-in .bp-photo-slot { flex: 1 1 0; min-height: 0; aspect-ratio: auto; position: relative; overflow: hidden; }
+.bp-about-aside-in .bp-photo-slot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 14%; }
+.bp-about-aside-in .bp-card { margin-bottom: 0; }
+
+/* skills */
+.bp-skill-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
+.bp-skill-g { background: var(--bg); padding: 28px; }
+.bp-skill-g h3 { font-family: var(--mono); font-size: 13px; color: var(--acc); margin-bottom: 18px; letter-spacing: .5px; }
+.bp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
+.bp-chip { font-family: var(--mono); font-size: 12.5px; color: var(--fg); border: 1px solid var(--line); padding: 8px 13px; transition: .2s; }
+.bp-chip:hover { border-color: var(--acc); color: var(--acc); }
+.bp-skills-intro { color: var(--fg-dim); font-size: 15px; margin-bottom: 28px; max-width: 52ch; }
+.bp-studying { margin-top: 28px; font-family: var(--mono); font-size: 13.5px; color: var(--acc); border: 1px solid var(--acc); padding: 16px 20px; display: flex; gap: 12px; align-items: center; background: var(--acc-soft); }
+.bp-studying::before { content:&quot;▸&quot;; }
+
+/* certifications — standout band */
+.bp-cert-band { border: 1px solid var(--acc); background: linear-gradient(150deg, var(--acc-soft), var(--panel) 74%); box-shadow: 0 22px 54px -34px var(--acc); padding: clamp(24px,3.4vw,34px); margin-top: 26px; position: relative; }
+.bp-cert-band::before, .bp-cert-band::after { content:&quot;&quot;; position: absolute; width: 10px; height: 10px; border: 1px solid var(--acc); }
+.bp-cert-band::before { top: -1px; left: -1px; border-right: 0; border-bottom: 0; }
+.bp-cert-band::after { bottom: -1px; right: -1px; border-left: 0; border-top: 0; }
+.bp-cert-band-label { font-family: var(--mono); font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--acc); display: flex; gap: 9px; align-items: center; margin-bottom: 24px; }
+.bp-cert-band-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(20px,3vw,38px); }
+.bp-cert-feat { border-left: 2px solid var(--acc); padding-left: 20px; }
+.bp-cert-feat .nm { font-size: clamp(20px,2.2vw,26px); font-weight: 600; letter-spacing: -.015em; line-height: 1.08; display: flex; align-items: baseline; gap: 11px; }
+.bp-cert-feat .nm i { width: 9px; height: 9px; border-radius: 50%; background: var(--acc); box-shadow: 0 0 0 4px var(--acc-soft); flex-shrink: 0; transform: translateY(-2px); }
+.bp-cert-feat .is { font-family: var(--mono); font-size: 11.5px; color: var(--fg-dim); margin-top: 11px; line-height: 1.55; text-transform: uppercase; letter-spacing: .02em; }
+.bp-cert-verify { font-family: var(--mono); font-size: 11px; color: var(--acc); margin-top: 14px; display: inline-block; border-bottom: 1px solid transparent; transition: .2s; }
+.bp-cert-verify:hover { border-bottom-color: var(--acc); }
+.bp-certs-note { font-family: var(--mono); font-size: 12.5px; color: var(--fg-dim); margin-top: 20px; }
+
+/* contact */
+.bp-contact-h { font-size: clamp(30px,4.6vw,58px); font-weight: 600; letter-spacing: -.025em; line-height: 1.04; max-width: 16ch; }
+.bp-contact-h .em { color: var(--acc); }
+.bp-contact-sub { color: var(--fg-dim); font-size: 17px; margin-top: 22px; max-width: 44ch; }
+.bp-links { margin-top: 42px; border-top: 1px solid var(--line); }
+.bp-link { display: flex; align-items: center; gap: 18px; padding: 22px 4px; border-bottom: 1px solid var(--line); transition: .25s; }
+.bp-link:hover { padding-left: 16px; background: var(--acc-soft); }
+.bp-link .k { font-family: var(--mono); font-size: 11px; letter-spacing: 1px; text-transform: uppercase; color: var(--fg-faint); width: 96px; flex-shrink: 0; }
+.bp-link .v { font-size: clamp(16px,2vw,22px); font-weight: 600; flex: 1; }
+.bp-link .ar { color: var(--acc); font-family: var(--mono); transition: .25s; }
+.bp-link:hover .ar { transform: translate(4px,-4px); }
+
+.bp-footer { border-top: 1px solid var(--line); padding-block: 28px; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; font-family: var(--mono); font-size: 11.5px; color: var(--fg-faint); }
+.bp-footer a:hover { color: var(--acc); }
+
+.reveal { } .reveal.in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference){
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.7,.2,1); }
+}
+@media (max-width: 880px){
+  .bp-hero-grid { grid-template-columns: 1fr; }
+  .bp-hero-right { max-width: 400px; }
+  .bp-cols { grid-template-columns: 1fr; }
+  .bp-col { border-right: 0; border-bottom: 1px solid var(--line); }
+  .bp-feat { grid-template-columns: 1fr; }
+  .bp-feat.flip .bp-feat-media { order: 0; }
+  .bp-about { grid-template-columns: 1fr; }
+  .bp-about-aside-in .bp-photo-slot { flex: 0 0 auto; aspect-ratio: 3/2.4; }
+  .bp-skill-groups { grid-template-columns: 1fr; }
+  .bp-cert-band-grid { grid-template-columns: 1fr; gap: 26px; }
+}
+</style><div class="bp-grid"></div><div class="bp-frame"></div><nav class="bp-nav "><div class="bp-nav-in"><a href="#inicio" class="bp-mark"><span class="pin"></span>A.AGUILAR<span class="bp-mark-suf"><b>·</b>INFRA/NUBE</span></a><div class="bp-navlinks"><a href="#inicio" class="bp-navlink active">Inicio</a><a href="#mente" class="bp-navlink ">Enfoque</a><a href="#proyectos" class="bp-navlink ">Proyectos</a><a href="#sobre" class="bp-navlink ">Sobre mí</a><a href="#habilidades" class="bp-navlink ">Habilidades</a><a href="#contacto" class="bp-navlink ">Contacto</a></div><div class="bp-ctrls"><a class="bp-tg bp-tg-lang" href="/en/" aria-label="Switch to English"><span class="on">ES</span>/<span class="">EN</span></a><button class="bp-tg" aria-label="Activar modo claro">☾</button><button class="bp-burger" aria-label="Menú" aria-expanded="false">☰</button></div></div></nav><div class="bp-mobnav "><a href="#inicio" class="active">Inicio</a><a href="#mente" class="">Enfoque</a><a href="#proyectos" class="">Proyectos</a><a href="#sobre" class="">Sobre mí</a><a href="#habilidades" class="">Habilidades</a><a href="#contacto" class="">Contacto</a></div><main class="bp-main"><header id="inicio" class="bp-shell bp-hero"><div class="bp-kicker"><i class="bp-dot"></i>Profesional de TI e infraestructura · +10 años</div><div class="bp-hero-grid"><div><h1 class="bp-headline"><span class="br">Pienso en cómo se rompen</span><span class="br"><span class="em">las cosas.</span></span><span class="br">Antes de que se rompan.</span></h1><p class="bp-sub">Diseño y sostengo sistemas anticipando dónde van a fallar: dependencias, casos límite, el detalle que nadie miró. Esa anticipación es mi oficio.</p><p class="bp-role">// <!-- -->Certificado en arquitectura de soluciones en la nube, ganando experiencia en proyectos reales</p><div class="bp-cta"><a href="#proyectos" class="bp-btn">Ver proyectos<!-- --> →</a><a href="#contacto" class="bp-btn ghost">Contacto</a></div></div><div class="bp-hero-right"><div class="bp-photo-card"><div class="bp-photo-bar"><i></i><i></i><i></i><span>~/armando — id</span></div><div class="bp-photo-img"><img src="/assets/armando-aguilar.webp" alt="Armando Aguilar" width="900" height="1136" fetchpriority="high"/><div class="bp-photo-meta"><span class="who"><b>●</b> <!-- -->Armando Aguilar</span></div></div></div><div class="bp-social"><a class="bp-soc gh" href="https://github.com/armando86mx" target="_blank" rel="noopener">GitHub <span>↗</span></a><a class="bp-soc li" href="https://www.linkedin.com/in/armando-ag/" target="_blank" rel="noopener">LinkedIn <span>↗</span></a></div></div></div></header><section id="mente" class="bp-shell bp-section"><div class="reveal  "><div class="bp-sechead"><span class="bp-cross"></span><span class="sec">SEC.01</span><h2 class="ttl">La mente analítica</h2><span class="rule"></span><span class="coord">X:0240 · Y:0160</span></div></div><div class="reveal  "><p class="bp-analytic-lead">Abordo la tecnología con una mentalidad analítica forjada en una trayectoria poco lineal. Donde otros ven sistemas aislados, yo veo dependencias interconectadas y <span class="hl">posibles puntos de falla.</span></p></div><div class="reveal  "><div class="bp-cols"><div class="bp-col"><span class="idx">0<!-- -->1</span><h3>Filosofía</h3><p>La simplicidad es la mayor sofisticación. Reducir dependencias, aislar dominios.</p></div><div class="bp-col"><span class="idx">0<!-- -->2</span><h3>Métricas</h3><p>Medir todo. Optimizar con base en datos, no en intuición.</p></div><div class="bp-col"><span class="idx">0<!-- -->3</span><h3>Ejecución</h3><p>Entrega iterativa con controles de calidad. Fallar rápido, recuperarse más rápido.</p></div></div></div></section><section id="proyectos" class="bp-shell bp-section"><div class="reveal  "><div class="bp-sechead"><span class="bp-cross"></span><span class="sec">SEC.02</span><h2 class="ttl">Proyectos seleccionados</h2><span class="rule"></span><span class="coord">4<!-- --> <!-- -->registros</span></div></div><div class="reveal  "><article class="bp-feat "><div class="bp-feat-text"><div class="bp-feat-area">Sistemas · Nube</div><h3 class="bp-feat-title">Estudiar la Biblia en su idioma original, sin salir de la app</h3><div class="bp-feat-name">Biblia de estudio MVI Amor y Gracia<!-- --> · <!-- -->PWA</div><div class="bp-feat-body"><p class="prob"><span class="lbl">Problema</span>Las Biblias de estudio existentes cobran extra por el idioma original u obligan a salir a otras páginas, fragmentando el estudio.</p><p class="res"><span class="lbl">Resultado</span>Una PWA instalable y gratuita: al tocar cualquier palabra aparece su idioma original (griego/hebreo), significado, contexto, número Strong, morfología y todas sus apariciones, sin salir de la app. Indexé el texto palabra por palabra contra las fuentes en griego y hebreo, diseñé el modelo de datos que conecta cada término con sus apariciones, y la desplegué en AWS.</p></div><div class="bp-feat-tags"><span>PWA</span><span>AWS</span><span>Griego / Hebreo</span><span>Modelo de datos</span></div><div class="bp-feat-ai">Desarrollo asistido por IA, bajo mi dirección</div><div class="bp-pbtns"><span class="bp-pbtn soon">Ver sitio web<!-- --> <span class="s">· <!-- -->en camino</span></span></div></div><div class="bp-feat-media"><div class="aa-car"><div class="aa-car-stage"><div class="aa-car-track" style="transform:translateX(0%)"><div class="aa-car-slide"><img src="/assets/biblia-1.webp" alt="Biblia de estudio MVI Amor y Gracia — capturas de la PWA 1" draggable="false" loading="lazy" width="589" height="1280"/></div><div class="aa-car-slide"><img src="/assets/biblia-2.webp" alt="Biblia de estudio MVI Amor y Gracia — capturas de la PWA 2" draggable="false" loading="lazy" width="589" height="1280"/></div><div class="aa-car-slide"><img src="/assets/biblia-3.webp" alt="Biblia de estudio MVI Amor y Gracia — capturas de la PWA 3" draggable="false" loading="lazy" width="589" height="1280"/></div><div class="aa-car-slide"><img src="/assets/biblia-4.webp" alt="Biblia de estudio MVI Amor y Gracia — capturas de la PWA 4" draggable="false" loading="lazy" width="589" height="1280"/></div><div class="aa-car-slide"><img src="/assets/biblia-5.webp" alt="Biblia de estudio MVI Amor y Gracia — capturas de la PWA 5" draggable="false" loading="lazy" width="589" height="1280"/></div><div class="aa-car-slide"><img src="/assets/biblia-6.webp" alt="Biblia de estudio MVI Amor y Gracia — capturas de la PWA 6" draggable="false" loading="lazy" width="589" height="1280"/></div><div class="aa-car-slide"><img src="/assets/biblia-7.webp" alt="Biblia de estudio MVI Amor y Gracia — capturas de la PWA 7" draggable="false" loading="lazy" width="589" height="1280"/></div></div><span class="aa-car-badge">En desarrollo</span><span class="aa-car-tag">capturas de la PWA</span><button class="aa-car-btn prev" aria-label="Anterior">‹</button><button class="aa-car-btn next" aria-label="Siguiente">›</button></div><div class="aa-car-foot"><div class="aa-car-dots"><button class="aa-car-dot on" aria-label="Ir a 1"></button><button class="aa-car-dot" aria-label="Ir a 2"></button><button class="aa-car-dot" aria-label="Ir a 3"></button><button class="aa-car-dot" aria-label="Ir a 4"></button><button class="aa-car-dot" aria-label="Ir a 5"></button><button class="aa-car-dot" aria-label="Ir a 6"></button><button class="aa-car-dot" aria-label="Ir a 7"></button></div><span class="aa-car-count">01<!-- --> / <!-- -->07</span></div></div></div></article></div><div class="reveal  "><article class="bp-feat flip"><div class="bp-feat-text"><div class="bp-feat-area">Sistemas · Seguridad</div><h3 class="bp-feat-title">Un sistema financiero que protege lo sensible</h3><div class="bp-feat-name">MVI Amor y Gracia — Sistema financiero<!-- --> · <!-- -->Plataforma interna</div><div class="bp-feat-body"><p class="prob"><span class="lbl">Problema</span>Administrar las finanzas de una organización con datos sensibles expuestos a riesgo.</p><p class="res"><span class="lbl">Resultado</span>Diseñé el modelo de datos y la arquitectura de seguridad, dejando la información crítica fuera del alcance de la web.</p></div><div class="bp-feat-tags"><span>Arquitectura</span><span>Seguridad</span><span>Modelo de datos</span></div><div class="bp-feat-ai">Desarrollo asistido por IA, bajo mi dirección</div></div><div class="bp-feat-media"><div class="bp-media-frame"><span class="tag">dashboard real</span><img src="/assets/dash-financiero.webp" alt="MVI Amor y Gracia — Sistema financiero" loading="lazy" width="1100" height="576"/></div></div></article></div><div class="reveal  "><article class="bp-feat "><div class="bp-feat-text"><div class="bp-feat-area">Infraestructura · Recuperación ante desastre</div><h3 class="bp-feat-title">Restaurar todo en menos de 24 horas</h3><div class="bp-feat-name">Hyatt Regency Cancún<!-- --> · <!-- -->Infraestructura de red</div><div class="bp-feat-body"><p class="prob"><span class="lbl">Problema</span>Una tormenta tropical destruyó la infraestructura de red de un restaurante a horas de su inauguración.</p><p class="res"><span class="lbl">Resultado</span>No solo la restauré: rediseñé la instalación para resistir el entorno costero.</p></div><div class="bp-feat-tags"><span>Infraestructura de redes</span><span>Configuración de equipos</span><span>Configuración de servidores</span></div></div><div class="bp-feat-media"><div class="bp-media-frame"><span class="tag">Hyatt Regency Cancún</span><img src="/assets/hyatt.webp" alt="Hyatt Regency Cancún" loading="lazy" width="1100" height="767"/></div></div></article></div><div class="reveal  "><article class="bp-feat flip"><div class="bp-feat-text"><div class="bp-feat-area">Web · Desarrollo y animación</div><h3 class="bp-feat-title">Una sección entera, construida y animada antes del amanecer</h3><div class="bp-feat-name">Residenciales Santuario — La Senda<!-- --> · <!-- -->Sección de sitio</div><div class="bp-feat-body"><p class="prob"><span class="lbl">Problema</span>Un desarrollo inmobiliario de alto valor necesitaba una sección nueva en su sitio web ya existente, lista para una presentación clave al amanecer.</p><p class="res"><span class="lbl">Resultado</span>Construí la sección completa —contenido, diseño y animaciones— en una sola madrugada, integrada al sitio existente y adaptable a cualquier dispositivo.</p></div><div class="bp-feat-tags"><span>Web</span><span>Animación</span><span>Responsive</span><span>Entrega rápida</span></div><div class="bp-pbtns"><a class="bp-pbtn primary" href="https://santuarioresidenciales.com.mx/la-senda/" target="_blank" rel="noopener">Ver sitio web<!-- --> ↗</a></div></div><div class="bp-feat-media"><div class="bp-media-frame"><span class="tag">sitio en vivo</span><img src="/assets/la-senda.webp" alt="Residenciales Santuario — La Senda" loading="lazy" width="1100" height="585"/></div></div></article></div></section><section id="sobre" class="bp-shell bp-section"><div class="reveal  "><div class="bp-sechead"><span class="bp-cross"></span><span class="sec">SEC.03</span><h2 class="ttl">Sobre mí</h2><span class="rule"></span><span class="coord">X:0720 · Y:0480</span></div></div><div class="bp-about"><div class="reveal  "><div><p>Soy Armando Aguilar, profesional de TI e infraestructura con más de una década sosteniendo sistemas reales. Hoy estoy en transición hacia la arquitectura de soluciones en la nube: llevar todo lo aprendido manteniendo cosas en producción hacia el diseño de plataformas que escalan y resisten.</p><p>Mi formación es poco lineal, y esa es mi ventaja. Me formé en sistemas y redes en dos países —un TSU en México y una licenciatura en Francia— y dirijo equipos y proyectos de forma empírica.</p><div class="bp-card" style="margin-top:28px;margin-bottom:0"><h3>Formación</h3><div class="bp-edu-item"><h4>IUT — Institut Universitaire de Technologie<!-- --> · <!-- -->Francia</h4><div class="d">Licenciatura en Sistemas Informáticos y de Software · Administración de Sistemas y Redes</div><div class="y">2011 — 2012</div><div class="desc">Proyecto de titulación: desarrollé y puse en marcha un servidor que conectaba a todas las universidades de Francia para gestionar eventos académicos entre ellas: comunicarse, saber dónde sería el próximo evento, qué lugares turísticos había alrededor y los hoteles cercanos recomendados.</div></div><div class="bp-edu-item"><h4>Universidad Tecnológica Metropolitana<!-- --> · <!-- -->México</h4><div class="d">Técnico Superior Universitario en TIC · Redes y Telecomunicaciones</div><div class="y">2009 — 2011</div><div class="desc">Formación en redes y telecomunicaciones, donde gané varios primeros lugares en configuración de redes y telecomunicaciones. Tras un año de evaluaciones, fui uno de los pocos seleccionados a nivel nacional para una beca de estudios en Francia; me certifiqué en francés y obtuve un resultado sobresaliente en el examen nacional de egreso (EGETSU).</div></div></div></div></div><div class="reveal  bp-about-aside"><div class="bp-about-aside-in"><div class="bp-photo-slot"><img src="/assets/armando-aguilar-about.webp" alt="Armando Aguilar" loading="lazy" width="760" height="960"/></div><div class="bp-card"><h3>Idiomas</h3><div class="bp-langrow"><b>Español</b><span>Nativo</span></div><div class="bp-langrow"><b>Inglés</b><span>C1</span></div><div class="bp-langrow"><b>Francés</b><span>Intermedio</span></div></div></div></div></div></section><section id="habilidades" class="bp-shell bp-section"><div class="reveal  "><div class="bp-sechead"><span class="bp-cross"></span><span class="sec">SEC.04</span><h2 class="ttl">Habilidades</h2><span class="rule"></span><span class="coord">X:0960 · Y:0640</span></div></div><div class="reveal  "><p class="bp-skills-intro">Honesto, sin barras de nivel. Lo que de verdad hago.</p></div><div class="reveal  "><div class="bp-skill-groups"><div class="bp-skill-g"><h3>Nube e Infraestructura</h3><div class="bp-chips"><span class="bp-chip">AWS (en curso)</span><span class="bp-chip">Linux (básico, en mejora)</span><span class="bp-chip">Redes</span><span class="bp-chip">DNS / SSL</span><span class="bp-chip">Administración de servidores</span><span class="bp-chip">Hosting</span><span class="bp-chip">Git</span></div></div><div class="bp-skill-g"><h3>Desarrollo y sistemas</h3><div class="bp-chips"><span class="bp-chip">HTML</span><span class="bp-chip">CSS</span><span class="bp-chip">Python</span><span class="bp-chip">WordPress</span><span class="bp-chip">WooCommerce</span><span class="bp-chip">Elementor</span><span class="bp-chip">Dirección de desarrollo con IA (Claude Code)</span></div></div></div></div><div class="reveal  "><div class="bp-studying">Actualmente preparándome para la certificación oficial de AWS.</div></div><div class="reveal  "><div class="bp-cert-band"><span class="bp-cert-band-label">★ <!-- -->Certificaciones AWS · completadas</span><div class="bp-cert-band-grid"><div class="bp-cert-feat"><div class="nm"><i></i>AWS Cloud Solutions Architect</div><div class="is">Coursera · AWS<!-- --> · <!-- -->Completado · 4 cursos · arquitectura de soluciones en la nube</div><a class="bp-cert-verify" href="https://coursera.org/verify/professional-cert/E5CMG00KYTRP" target="_blank" rel="noopener">Verificar<!-- --> ↗</a></div><div class="bp-cert-feat"><div class="nm"><i></i>AWS Fundamentals</div><div class="is">Coursera · AWS<!-- --> · <!-- -->Completado · 3 cursos · fundamentos de AWS</div><a class="bp-cert-verify" href="https://coursera.org/verify/specialization/7OOXO00X4SJ6" target="_blank" rel="noopener">Verificar<!-- --> ↗</a></div></div></div><p class="bp-certs-note">Y más de 50 cursos completados en Platzi, Coursera y Udemy.</p></div></section><section id="contacto" class="bp-shell bp-section"><div class="reveal  "><div class="bp-sechead"><span class="bp-cross"></span><span class="sec">SEC.05</span><h2 class="ttl">Contacto</h2><span class="rule"></span></div></div><div class="reveal  "><h2 class="bp-contact-h">¿Construimos algo que no se<!-- --> <span class="em">rompa?</span></h2><p class="bp-contact-sub">Disponible para proyectos de infraestructura, nube y desarrollo asistido por IA. Escríbeme y conversamos.</p><div class="bp-links"><a class="bp-link" href="mailto:hola@armandoaguilar.dev"><span class="k">Email</span><span class="v">hola@armandoaguilar.dev</span><span class="ar">↗</span></a><a class="bp-link" href="https://github.com/armando86mx" target="_blank" rel="noopener"><span class="k">GitHub</span><span class="v">armando86mx</span><span class="ar">↗</span></a><a class="bp-link" href="https://www.linkedin.com/in/armando-ag/" target="_blank" rel="noopener"><span class="k">LinkedIn</span><span class="v">armando-ag</span><span class="ar">↗</span></a><a class="bp-link" href="https://www.google.com/maps/search/?api=1&amp;query=Puebla%2C+M%C3%A9xico" target="_blank" rel="noopener"><span class="k">Ubicación</span><span class="v">Puebla, México</span><span class="ar">↗</span></a></div></div></section><footer class="bp-shell bp-footer"><span>© <!-- -->2026<!-- --> <!-- -->Armando Aguilar<!-- --> · <!-- -->Infraestructura &amp; Arquitectura en la nube</span><a href="https://www.linkedin.com/in/armando-ag/" target="_blank" rel="noopener">LinkedIn ↗</a></footer></main></div></div><!--/#root-->
 <!-- React vendorizado (producción) + scripts precompilados. Sin Babel en el navegador.
      Para recompilar tras editar los .jsx: npm install && npm run build -->
 <script src="/vendor/react.production.min.js"></script>
