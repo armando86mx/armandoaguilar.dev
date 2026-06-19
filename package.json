@@ -1,0 +1,17 @@
+{
+  "name": "armando-aguilar-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Portafolio personal de Armando Aguilar — sitio estático bilingüe (ES/EN).",
+  "scripts": {
+    "build": "babel carousel.jsx -o carousel.js && babel armando-v2.jsx -o app.js"
+  },
+  "babel": {
+    "presets": ["@babel/preset-react"]
+  },
+  "devDependencies": {
+    "@babel/cli": "^7.29.0",
+    "@babel/core": "^7.29.0",
+    "@babel/preset-react": "^7.27.1"
+  }
+}
