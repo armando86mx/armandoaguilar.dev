@@ -102,7 +102,7 @@ const CSS = `
 
 /* hero photo — Mac window */
 .bp-hero-right { display: flex; flex-direction: column; }
-.bp-photo-card { border: 1px solid var(--line); overflow: hidden; background: var(--panel); box-shadow: 0 30px 70px -42px #000; }
+.bp-photo-card { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--panel); box-shadow: 0 30px 70px -42px #000; }
 .bp-photo-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); }
 .bp-photo-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
 .bp-photo-bar i:nth-child(1){ background: var(--acc); }
@@ -448,6 +448,7 @@ function App() {
               <a className="bp-link" href={`mailto:${C.contact.email}`}><span className="k">Email</span><span className="v">{C.contact.email}</span><span className="ar">↗</span></a>
               <a className="bp-link" href={C.contact.github} target="_blank" rel="noopener"><span className="k">GitHub</span><span className="v">{C.contact.githubLabel}</span><span className="ar">↗</span></a>
               <a className="bp-link" href={C.contact.linkedin} target="_blank" rel="noopener"><span className="k">LinkedIn</span><span className="v">{C.contact.linkedinLabel}</span><span className="ar">↗</span></a>
+              <a className="bp-link" href={C.contact.locationLink} target="_blank" rel="noopener"><span className="k">{t(C.contact.locationLabel)}</span><span className="v">{t(C.contact.location)}</span><span className="ar">↗</span></a>
             </div>
           </Reveal>
         </section>

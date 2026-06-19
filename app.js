@@ -133,7 +133,7 @@ const CSS = `
 
 /* hero photo — Mac window */
 .bp-hero-right { display: flex; flex-direction: column; }
-.bp-photo-card { border: 1px solid var(--line); overflow: hidden; background: var(--panel); box-shadow: 0 30px 70px -42px #000; }
+.bp-photo-card { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; background: var(--panel); box-shadow: 0 30px 70px -42px #000; }
 .bp-photo-bar { display: flex; align-items: center; gap: 7px; padding: 11px 14px; border-bottom: 1px solid var(--line); }
 .bp-photo-bar i { width: 10px; height: 10px; border-radius: 50%; background: var(--line); }
 .bp-photo-bar i:nth-child(1){ background: var(--acc); }
@@ -683,6 +683,17 @@ function App() {
   }, "LinkedIn"), /*#__PURE__*/React.createElement("span", {
     className: "v"
   }, C.contact.linkedinLabel), /*#__PURE__*/React.createElement("span", {
+    className: "ar"
+  }, "\u2197")), /*#__PURE__*/React.createElement("a", {
+    className: "bp-link",
+    href: C.contact.locationLink,
+    target: "_blank",
+    rel: "noopener"
+  }, /*#__PURE__*/React.createElement("span", {
+    className: "k"
+  }, t(C.contact.locationLabel)), /*#__PURE__*/React.createElement("span", {
+    className: "v"
+  }, t(C.contact.location)), /*#__PURE__*/React.createElement("span", {
     className: "ar"
   }, "\u2197"))))), /*#__PURE__*/React.createElement("footer", {
     className: "bp-shell bp-footer"

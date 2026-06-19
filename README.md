@@ -15,8 +15,9 @@ React precompilado a JS plano: **no usa Babel en el navegador** y no depende de 
 | `app.js`, `carousel.js` | **Generados** a partir de los `.jsx`. No los edites a mano. |
 | `base.css` | Estilos base/tema (variables, reset, body). Compartido por ambas páginas. |
 | `vendor/` | React y ReactDOM (build de producción), servidos localmente. |
+| `fonts/` | Tipografías autohospedadas (Space Grotesk, IBM Plex Mono) en WOFF2. |
 | `assets/` | Imágenes en WebP. Originales en `assets/_originals/` (ignorado por git). |
-| `favicon.svg`, `og-image.png` | Ícono y tarjeta social (1200×630). |
+| `favicon.svg`, `og-image.png`, `og-image-en.png` | Ícono y tarjetas sociales ES/EN (1200×630). |
 | `robots.txt`, `sitemap.xml` | SEO. El sitemap lista `/` y `/en/` con hreflang. |
 
 ## Ver en local
@@ -53,11 +54,11 @@ python3 -m http.server 8000
 Sube **todo** el contenido de la carpeta a `public_html/` (Git, File Manager o FTP),
 **incluida la subcarpeta `en/`**. Necesario en el servidor: `index.html`, `en/index.html`,
 `base.css`, `content.js`, `app.js`, `carousel.js`, `favicon.svg`, `og-image.png`,
-`robots.txt`, `sitemap.xml`, `vendor/` y `assets/`. **No subas** `node_modules/` ni
+`og-image-en.png`, `robots.txt`, `sitemap.xml`, `vendor/`, `fonts/` y `assets/`. **No subas** `node_modules/` ni
 `assets/_originals/` (ya están en `.gitignore`). Los `.jsx`, `package.json` y
 `package-lock.json` no son necesarios en producción, pero no estorban.
 
 ## Notas
 
-- Las tipografías se cargan desde Google Fonts (con respaldo a fuentes del sistema). Es la única dependencia externa en runtime; opcionalmente puedes autohospedarlas.
+- Las tipografías (Space Grotesk, IBM Plex Mono) están **autohospedadas** en `fonts/` (WOFF2, con `@font-face` en `base.css`). El sitio **no tiene dependencias externas en runtime**.
 - Tras el despliegue, envía el `sitemap.xml` en Google Search Console.

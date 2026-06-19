@@ -244,6 +244,9 @@ window.CONTENT = {
     githubLabel: "armando86mx",
     linkedin: "https://www.linkedin.com/in/armando-ag/",
     linkedinLabel: "armando-ag",
+    locationLabel: { es: "Ubicación", en: "Location" },
+    location: { es: "Puebla, México", en: "Puebla, Mexico" },
+    locationLink: "https://www.google.com/maps/search/?api=1&query=Puebla%2C+M%C3%A9xico",
   },
 
   ui: {
