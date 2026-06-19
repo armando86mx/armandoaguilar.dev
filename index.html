@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<!-- Tema sin parpadeo: aplica el tema guardado ANTES de pintar (evita el flashazo oscuro al cambiar de idioma). -->
-<script>try{var t=JSON.parse(localStorage.getItem("aa_theme"));if(t==="light"||t==="dark")document.documentElement.setAttribute("data-theme",t)}catch(e){}</script>
+<!-- Tema sin parpadeo: aplica el tema guardado ANTES de pintar. Externo (no inline) por la CSP: script-src 'self'. -->
+<script src="/theme.js"></script>
 <!-- Analítica: Google Analytics (GA4) + Microsoft Clarity (IDs en /analytics.js) -->
 <script async src="/analytics.js"></script>
 <title>Armando Aguilar · Infraestructura & Nube</title>
