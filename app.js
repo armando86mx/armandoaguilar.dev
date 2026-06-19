@@ -163,7 +163,7 @@ const CSS = `
 .bp-col:last-child { border-right: 0; }
 .bp-col:hover { background: var(--acc-soft); }
 .bp-col .idx { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); position: absolute; top: 12px; right: 14px; }
-.bp-col h4 { font-family: var(--mono); font-size: 14px; color: var(--acc); margin-bottom: 14px; letter-spacing: .4px; }
+.bp-col h3 { font-family: var(--mono); font-size: 14px; color: var(--acc); margin-bottom: 14px; letter-spacing: .4px; }
 .bp-col p { color: var(--fg-dim); font-size: 14.5px; }
 
 /* projects — alternating feature */
@@ -199,13 +199,13 @@ const CSS = `
 .bp-about p { font-size: clamp(16px,1.7vw,19px); color: var(--fg-dim); margin-bottom: 20px; max-width: 52ch; }
 .bp-about p:first-of-type { color: var(--fg); }
 .bp-card { border: 1px solid var(--line); background: var(--panel); padding: 24px; margin-bottom: 24px; }
-.bp-card h5 { font-family: var(--mono); font-size: 12px; color: var(--acc); letter-spacing: .6px; margin-bottom: 16px; text-transform: uppercase; }
+.bp-card h3 { font-family: var(--mono); font-size: 12px; color: var(--acc); letter-spacing: .6px; margin-bottom: 16px; text-transform: uppercase; }
 .bp-langrow { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line-2); font-size: 15px; }
 .bp-langrow:last-child { border-bottom: 0; }
 .bp-langrow span { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); }
 .bp-edu-item { padding: 14px 0; border-bottom: 1px solid var(--line-2); }
 .bp-edu-item:last-child { border-bottom: 0; }
-.bp-edu-item h6 { font-size: 14.5px; font-weight: 600; }
+.bp-edu-item h4 { font-size: 14.5px; font-weight: 600; }
 .bp-edu-item .d { font-size: 13px; color: var(--fg-dim); margin: 4px 0; }
 .bp-edu-item .y { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); margin-bottom: 8px; }
 .bp-edu-item .desc { font-size: 13.5px; color: var(--fg-dim); border-top: 1px solid var(--line-2); padding-top: 10px; margin-top: 4px; }
@@ -220,7 +220,7 @@ const CSS = `
 /* skills */
 .bp-skill-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .bp-skill-g { background: var(--bg); padding: 28px; }
-.bp-skill-g h4 { font-family: var(--mono); font-size: 13px; color: var(--acc); margin-bottom: 18px; letter-spacing: .5px; }
+.bp-skill-g h3 { font-family: var(--mono); font-size: 13px; color: var(--acc); margin-bottom: 18px; letter-spacing: .5px; }
 .bp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .bp-chip { font-family: var(--mono); font-size: 12.5px; color: var(--fg); border: 1px solid var(--line); padding: 8px 13px; transition: .2s; }
 .bp-chip:hover { border-color: var(--acc); color: var(--acc); }
@@ -332,7 +332,9 @@ function Feature({
   }, t(p.imageLabel)), /*#__PURE__*/React.createElement("img", {
     src: p.image,
     alt: t(p.name),
-    loading: "lazy"
+    loading: "lazy",
+    width: p.imageW,
+    height: p.imageH
   })))));
 }
 function App() {
@@ -461,8 +463,9 @@ function App() {
   }, /*#__PURE__*/React.createElement("img", {
     src: "/assets/armando-aguilar.webp",
     alt: "Armando Aguilar",
-    width: "600",
-    height: "675"
+    width: "900",
+    height: "1136",
+    fetchpriority: "high"
   }), /*#__PURE__*/React.createElement("div", {
     className: "bp-photo-meta"
   }, /*#__PURE__*/React.createElement("span", {
@@ -511,7 +514,7 @@ function App() {
     key: i
   }, /*#__PURE__*/React.createElement("span", {
     className: "idx"
-  }, "0", i + 1), /*#__PURE__*/React.createElement("h4", null, t(c.title)), /*#__PURE__*/React.createElement("p", null, t(c.body))))))), /*#__PURE__*/React.createElement("section", {
+  }, "0", i + 1), /*#__PURE__*/React.createElement("h3", null, t(c.title)), /*#__PURE__*/React.createElement("p", null, t(c.body))))))), /*#__PURE__*/React.createElement("section", {
     id: "proyectos",
     className: "bp-shell bp-section"
   }, /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
@@ -556,10 +559,10 @@ function App() {
       marginTop: "28px",
       marginBottom: 0
     }
-  }, /*#__PURE__*/React.createElement("h5", null, t(C.about.educationLabel)), C.about.education.map((e, i) => /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, t(C.about.educationLabel)), C.about.education.map((e, i) => /*#__PURE__*/React.createElement("div", {
     className: "bp-edu-item",
     key: i
-  }, /*#__PURE__*/React.createElement("h6", null, e.school, " \xB7 ", t(e.place)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h4", null, e.school, " \xB7 ", t(e.place)), /*#__PURE__*/React.createElement("div", {
     className: "d"
   }, t(e.degree)), /*#__PURE__*/React.createElement("div", {
     className: "y"
@@ -574,10 +577,12 @@ function App() {
   }, C.about.photo ? /*#__PURE__*/React.createElement("img", {
     src: C.about.photo,
     alt: C.meta.name,
-    loading: "lazy"
+    loading: "lazy",
+    width: "760",
+    height: "960"
   }) : /*#__PURE__*/React.createElement("span", null, "[ ", t(C.about.photoLabel), " ]")), /*#__PURE__*/React.createElement("div", {
     className: "bp-card"
-  }, /*#__PURE__*/React.createElement("h5", null, t(C.about.languagesLabel)), C.about.languages.map((l, i) => /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, t(C.about.languagesLabel)), C.about.languages.map((l, i) => /*#__PURE__*/React.createElement("div", {
     className: "bp-langrow",
     key: i
   }, /*#__PURE__*/React.createElement("b", null, t(l.name)), /*#__PURE__*/React.createElement("span", null, t(l.level))))))))), /*#__PURE__*/React.createElement("section", {
@@ -602,7 +607,7 @@ function App() {
   }, C.skills.groups.map((g, i) => /*#__PURE__*/React.createElement("div", {
     className: "bp-skill-g",
     key: i
-  }, /*#__PURE__*/React.createElement("h4", null, t(g.label)), /*#__PURE__*/React.createElement("div", {
+  }, /*#__PURE__*/React.createElement("h3", null, t(g.label)), /*#__PURE__*/React.createElement("div", {
     className: "bp-chips"
   }, g.items.map((it, k) => /*#__PURE__*/React.createElement("span", {
     className: "bp-chip",

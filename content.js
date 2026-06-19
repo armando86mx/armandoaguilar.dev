@@ -103,7 +103,7 @@ window.CONTENT = {
       tags: [{ es: "Arquitectura", en: "Architecture" }, { es: "Seguridad", en: "Security" }, { es: "Modelo de datos", en: "Data model" }],
       status: null,
       link: null,
-      image: "/assets/dash-financiero.webp",
+      image: "/assets/dash-financiero.webp", imageW: 1100, imageH: 576,
       imageLabel: { es: "dashboard real", en: "live dashboard" },
     },
     {
@@ -124,7 +124,7 @@ window.CONTENT = {
       tags: [{ es: "Infraestructura de redes", en: "Network infrastructure" }, { es: "Configuración de equipos", en: "Workstation setup" }, { es: "Configuración de servidores", en: "Server configuration" }],
       status: null,
       link: null,
-      image: "/assets/hyatt.webp",
+      image: "/assets/hyatt.webp", imageW: 1100, imageH: 767,
       imageLabel: { es: "Hyatt Regency Cancún", en: "Hyatt Regency Cancún" },
     },
     {
@@ -146,7 +146,7 @@ window.CONTENT = {
       status: null,
       link: "https://santuarioresidenciales.com.mx/la-senda/",
       linkPending: true,
-      image: "/assets/la-senda.webp",
+      image: "/assets/la-senda.webp", imageW: 1100, imageH: 585,
       imageLabel: { es: "sitio en vivo", en: "live site" },
     },
   ],

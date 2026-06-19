@@ -117,7 +117,7 @@
   --grid-2: rgba(120,170,225,0.11);
   --fg: #dde7f2;
   --fg-dim: #8195aa;
-  --fg-faint: #566b80;
+  --fg-faint: #6b8196;
   --acc: oklch(0.82 0.12 226);
   --acc-soft: oklch(0.82 0.12 226 / 0.13);
   --sans: "Space Grotesk", system-ui, sans-serif;
@@ -133,7 +133,7 @@ html[data-theme="light"] {
   --grid-2: rgba(40,90,150,0.13);
   --fg: #102134;
   --fg-dim: #45607a;
-  --fg-faint: #7c93aa;
+  --fg-faint: #57697e;
   --acc: oklch(0.48 0.15 245);
   --acc-soft: oklch(0.48 0.15 245 / 0.1);
 }

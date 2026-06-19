@@ -132,7 +132,7 @@ const CSS = `
 .bp-col:last-child { border-right: 0; }
 .bp-col:hover { background: var(--acc-soft); }
 .bp-col .idx { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); position: absolute; top: 12px; right: 14px; }
-.bp-col h4 { font-family: var(--mono); font-size: 14px; color: var(--acc); margin-bottom: 14px; letter-spacing: .4px; }
+.bp-col h3 { font-family: var(--mono); font-size: 14px; color: var(--acc); margin-bottom: 14px; letter-spacing: .4px; }
 .bp-col p { color: var(--fg-dim); font-size: 14.5px; }
 
 /* projects — alternating feature */
@@ -168,13 +168,13 @@ const CSS = `
 .bp-about p { font-size: clamp(16px,1.7vw,19px); color: var(--fg-dim); margin-bottom: 20px; max-width: 52ch; }
 .bp-about p:first-of-type { color: var(--fg); }
 .bp-card { border: 1px solid var(--line); background: var(--panel); padding: 24px; margin-bottom: 24px; }
-.bp-card h5 { font-family: var(--mono); font-size: 12px; color: var(--acc); letter-spacing: .6px; margin-bottom: 16px; text-transform: uppercase; }
+.bp-card h3 { font-family: var(--mono); font-size: 12px; color: var(--acc); letter-spacing: .6px; margin-bottom: 16px; text-transform: uppercase; }
 .bp-langrow { display: flex; justify-content: space-between; padding: 10px 0; border-bottom: 1px solid var(--line-2); font-size: 15px; }
 .bp-langrow:last-child { border-bottom: 0; }
 .bp-langrow span { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); }
 .bp-edu-item { padding: 14px 0; border-bottom: 1px solid var(--line-2); }
 .bp-edu-item:last-child { border-bottom: 0; }
-.bp-edu-item h6 { font-size: 14.5px; font-weight: 600; }
+.bp-edu-item h4 { font-size: 14.5px; font-weight: 600; }
 .bp-edu-item .d { font-size: 13px; color: var(--fg-dim); margin: 4px 0; }
 .bp-edu-item .y { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); margin-bottom: 8px; }
 .bp-edu-item .desc { font-size: 13.5px; color: var(--fg-dim); border-top: 1px solid var(--line-2); padding-top: 10px; margin-top: 4px; }
@@ -189,7 +189,7 @@ const CSS = `
 /* skills */
 .bp-skill-groups { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line); border: 1px solid var(--line); }
 .bp-skill-g { background: var(--bg); padding: 28px; }
-.bp-skill-g h4 { font-family: var(--mono); font-size: 13px; color: var(--acc); margin-bottom: 18px; letter-spacing: .5px; }
+.bp-skill-g h3 { font-family: var(--mono); font-size: 13px; color: var(--acc); margin-bottom: 18px; letter-spacing: .5px; }
 .bp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .bp-chip { font-family: var(--mono); font-size: 12.5px; color: var(--fg); border: 1px solid var(--line); padding: 8px 13px; transition: .2s; }
 .bp-chip:hover { border-color: var(--acc); color: var(--acc); }
@@ -274,7 +274,7 @@ function Feature({ p, i, t }) {
           ) : (
             <div className="bp-media-frame">
               <span className="tag">{t(p.imageLabel)}</span>
-              <img src={p.image} alt={t(p.name)} loading="lazy" />
+              <img src={p.image} alt={t(p.name)} loading="lazy" width={p.imageW} height={p.imageH} />
             </div>
           )}
         </div>
@@ -350,7 +350,7 @@ function App() {
               <div className="bp-photo-card">
                 <div className="bp-photo-bar"><i/><i/><i/><span>~/armando — id</span></div>
                 <div className="bp-photo-img">
-                  <img src="/assets/armando-aguilar.webp" alt="Armando Aguilar" width="600" height="675" />
+                  <img src="/assets/armando-aguilar.webp" alt="Armando Aguilar" width="900" height="1136" fetchpriority="high" />
                   <div className="bp-photo-meta"><span className="who"><b>●</b> {t(C.hero.photoCaption)}</span></div>
                 </div>
               </div>
@@ -375,7 +375,7 @@ function App() {
           </Reveal>
           <Reveal>
             <div className="bp-cols">
-              {C.analytic.cols.map((c,i)=>(<div className="bp-col" key={i}><span className="idx">0{i+1}</span><h4>{t(c.title)}</h4><p>{t(c.body)}</p></div>))}
+              {C.analytic.cols.map((c,i)=>(<div className="bp-col" key={i}><span className="idx">0{i+1}</span><h3>{t(c.title)}</h3><p>{t(c.body)}</p></div>))}
             </div>
           </Reveal>
         </section>
@@ -394,16 +394,16 @@ function App() {
               <div>
                 {C.about.paras.map((p,i)=><p key={i}>{t(p)}</p>)}
                 <div className="bp-card" style={{marginTop:"28px", marginBottom:0}}>
-                  <h5>{t(C.about.educationLabel)}</h5>
-                  {C.about.education.map((e,i)=>(<div className="bp-edu-item" key={i}><h6>{e.school} · {t(e.place)}</h6><div className="d">{t(e.degree)}</div><div className="y">{e.years}</div>{e.desc && <div className="desc">{t(e.desc)}</div>}</div>))}
+                  <h3>{t(C.about.educationLabel)}</h3>
+                  {C.about.education.map((e,i)=>(<div className="bp-edu-item" key={i}><h4>{e.school} · {t(e.place)}</h4><div className="d">{t(e.degree)}</div><div className="y">{e.years}</div>{e.desc && <div className="desc">{t(e.desc)}</div>}</div>))}
                 </div>
               </div>
             </Reveal>
             <Reveal className="bp-about-aside">
               <div className="bp-about-aside-in">
-                <div className="bp-photo-slot">{C.about.photo ? <img src={C.about.photo} alt={C.meta.name} loading="lazy" /> : <span>[ {t(C.about.photoLabel)} ]</span>}</div>
+                <div className="bp-photo-slot">{C.about.photo ? <img src={C.about.photo} alt={C.meta.name} loading="lazy" width="760" height="960" /> : <span>[ {t(C.about.photoLabel)} ]</span>}</div>
                 <div className="bp-card">
-                  <h5>{t(C.about.languagesLabel)}</h5>
+                  <h3>{t(C.about.languagesLabel)}</h3>
                   {C.about.languages.map((l,i)=>(<div className="bp-langrow" key={i}><b>{t(l.name)}</b><span>{t(l.level)}</span></div>))}
                 </div>
               </div>
@@ -417,7 +417,7 @@ function App() {
           {C.skills.intro && <Reveal><p className="bp-skills-intro">{t(C.skills.intro)}</p></Reveal>}
           <Reveal>
             <div className="bp-skill-groups">
-              {C.skills.groups.map((g,i)=>(<div className="bp-skill-g" key={i}><h4>{t(g.label)}</h4><div className="bp-chips">{g.items.map((it,k)=><span className="bp-chip" key={k}>{t(it)}</span>)}</div></div>))}
+              {C.skills.groups.map((g,i)=>(<div className="bp-skill-g" key={i}><h3>{t(g.label)}</h3><div className="bp-chips">{g.items.map((it,k)=><span className="bp-chip" key={k}>{t(it)}</span>)}</div></div>))}
             </div>
           </Reveal>
           {C.skills.studying && <Reveal><div className="bp-studying">{t(C.skills.studying)}</div></Reveal>}

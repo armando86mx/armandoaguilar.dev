@@ -72,7 +72,7 @@
           <div className="aa-car-track" style={{ transform: `translateX(${-i * 100}%)` }}>
             {images.map((src, k) => (
               <div className="aa-car-slide" key={k}>
-                <img src={src} alt={`${name ? name + " — " : ""}${tag || "imagen"} ${k + 1}`} draggable="false" loading="lazy" />
+                <img src={src} alt={`${name ? name + " — " : ""}${tag || "imagen"} ${k + 1}`} draggable="false" loading="lazy" width="589" height="1280" />
               </div>
             ))}
           </div>

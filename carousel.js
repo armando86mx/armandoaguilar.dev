@@ -102,7 +102,9 @@
       src: src,
       alt: `${name ? name + " — " : ""}${tag || "imagen"} ${k + 1}`,
       draggable: "false",
-      loading: "lazy"
+      loading: "lazy",
+      width: "589",
+      height: "1280"
     })))), badge && /*#__PURE__*/React.createElement("span", {
       className: "aa-car-badge"
     }, badge), tag && /*#__PURE__*/React.createElement("span", {
