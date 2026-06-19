@@ -144,7 +144,7 @@ window.CONTENT = {
       ai: false,
       tags: ["Web", { es: "Animación", en: "Motion" }, "Responsive", { es: "Entrega rápida", en: "Fast delivery" }],
       status: null,
-      link: null,
+      link: "https://santuarioresidenciales.com.mx/la-senda/",
       linkPending: true,
       image: "assets/la-senda.webp",
       imageLabel: { es: "sitio en vivo", en: "live site" },
@@ -159,8 +159,8 @@ window.CONTENT = {
         en: "I'm Armando Aguilar, an IT and infrastructure professional with over a decade spent keeping real systems running. Today I'm moving into cloud solutions architecture — carrying everything I learned in production into the design of platforms that scale and endure.",
       },
       {
-        es: "Mi formación es poco lineal, y esa es mi ventaja. Estudié dos carreras formales en sistemas y redes, en dos países, y dirijo equipos y proyectos de forma empírica.",
-        en: "My path isn't linear, and that's my edge. I earned two formal degrees in systems and networks across two countries, and I've led teams and projects hands-on — by experience rather than formal methodology.",
+        es: "Mi formación es poco lineal, y esa es mi ventaja. Me formé en sistemas y redes en dos países —un TSU en México y una licenciatura en Francia— y dirijo equipos y proyectos de forma empírica.",
+        en: "My path isn't linear, and that's my edge. I trained in systems and networks across two countries — an advanced technical degree in Mexico and a bachelor's in France — and I've led teams and projects hands-on, learning by doing.",
       },
     ],
     languagesLabel: { es: "Idiomas", en: "Languages" },
@@ -219,7 +219,7 @@ window.CONTENT = {
         ],
       },
     ],
-    studying: { es: "Actualmente estudiando AWS Solutions Architect — Associate.", en: "Currently studying for the AWS Solutions Architect — Associate certification." },
+    studying: { es: "Actualmente preparándome para la certificación oficial de AWS.", en: "Currently preparing for the official AWS certification." },
   },
 
   certs: {
@@ -236,7 +236,7 @@ window.CONTENT = {
     label: { es: "Contacto", en: "Contact" },
     headline: { es: "¿Construimos algo que no se rompa?", en: "Shall we build something that won't break?" },
     blurb: {
-      es: "Disponible para proyectos de infraestructura, nube y desarrollo dirigido. Escríbeme y conversamos.",
+      es: "Disponible para proyectos de infraestructura, nube y desarrollo asistido por IA. Escríbeme y conversamos.",
       en: "Available for infrastructure, cloud, and AI-assisted development projects. Reach out and let's talk.",
     },
     email: "hola@armandoaguilar.dev",

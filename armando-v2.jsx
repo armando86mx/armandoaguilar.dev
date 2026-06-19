@@ -79,7 +79,7 @@ const CSS = `
 .bp-cross::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
 .bp-cross::after { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
 .bp-sechead .sec { font-family: var(--mono); font-size: 12px; color: var(--acc); letter-spacing: 1px; }
-.bp-sechead .ttl { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); letter-spacing: 2px; text-transform: uppercase; }
+.bp-sechead .ttl { font-family: var(--mono); font-size: 12px; font-weight: 400; color: var(--fg-dim); letter-spacing: 2px; text-transform: uppercase; }
 .bp-sechead .rule { flex: 1; height: 1px; background: var(--line); }
 .bp-sechead .coord { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); }
 
@@ -193,6 +193,7 @@ const CSS = `
 .bp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .bp-chip { font-family: var(--mono); font-size: 12.5px; color: var(--fg); border: 1px solid var(--line); padding: 8px 13px; transition: .2s; }
 .bp-chip:hover { border-color: var(--acc); color: var(--acc); }
+.bp-skills-intro { color: var(--fg-dim); font-size: 15px; margin-bottom: 28px; max-width: 52ch; }
 .bp-studying { margin-top: 28px; font-family: var(--mono); font-size: 13.5px; color: var(--acc); border: 1px solid var(--acc); padding: 16px 20px; display: flex; gap: 12px; align-items: center; background: var(--acc-soft); }
 .bp-studying::before { content:"▸"; }
 
@@ -269,7 +270,7 @@ function Feature({ p, i, t }) {
         </div>
         <div className="bp-feat-media">
           {p.images ? (
-            <Carousel images={p.images} badge={p.status ? t(p.status) : null} tag={t(p.imageLabel)} />
+            <Carousel images={p.images} badge={p.status ? t(p.status) : null} tag={t(p.imageLabel)} name={t(p.name)} />
           ) : (
             <div className="bp-media-frame">
               <span className="tag">{t(p.imageLabel)}</span>
@@ -363,7 +364,7 @@ function App() {
 
         {/* ANALYTIC */}
         <section id="mente" className="bp-shell bp-section">
-          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.01</span><span className="ttl">{t(C.analytic.label)}</span><span className="rule" /><span className="coord">{secCoord(1)}</span></div></Reveal>
+          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.01</span><h2 className="ttl">{t(C.analytic.label)}</h2><span className="rule" /><span className="coord">{secCoord(1)}</span></div></Reveal>
           <Reveal>
             <p className="bp-analytic-lead">{(() => {
               const key = lang === "es" ? "posibles puntos de falla" : "potential points of failure";
@@ -381,13 +382,13 @@ function App() {
 
         {/* PROJECTS — alternating */}
         <section id="proyectos" className="bp-shell bp-section">
-          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.02</span><span className="ttl">{lang==="es"?"Proyectos seleccionados":"Selected work"}</span><span className="rule" /><span className="coord">{C.projects.length} {lang==="es"?"registros":"records"}</span></div></Reveal>
+          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.02</span><h2 className="ttl">{lang==="es"?"Proyectos seleccionados":"Selected work"}</h2><span className="rule" /><span className="coord">{C.projects.length} {lang==="es"?"registros":"records"}</span></div></Reveal>
           {C.projects.map((p,i)=><Feature key={p.id} p={p} i={i} t={t} />)}
         </section>
 
         {/* ABOUT */}
         <section id="sobre" className="bp-shell bp-section">
-          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.03</span><span className="ttl">{t(C.about.label)}</span><span className="rule" /><span className="coord">{secCoord(3)}</span></div></Reveal>
+          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.03</span><h2 className="ttl">{t(C.about.label)}</h2><span className="rule" /><span className="coord">{secCoord(3)}</span></div></Reveal>
           <div className="bp-about">
             <Reveal>
               <div>
@@ -412,12 +413,14 @@ function App() {
 
         {/* SKILLS + CERTS */}
         <section id="habilidades" className="bp-shell bp-section">
-          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.04</span><span className="ttl">{t(C.skills.label)}</span><span className="rule" /><span className="coord">{secCoord(4)}</span></div></Reveal>
+          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.04</span><h2 className="ttl">{t(C.skills.label)}</h2><span className="rule" /><span className="coord">{secCoord(4)}</span></div></Reveal>
+          {C.skills.intro && <Reveal><p className="bp-skills-intro">{t(C.skills.intro)}</p></Reveal>}
           <Reveal>
             <div className="bp-skill-groups">
               {C.skills.groups.map((g,i)=>(<div className="bp-skill-g" key={i}><h4>{t(g.label)}</h4><div className="bp-chips">{g.items.map((it,k)=><span className="bp-chip" key={k}>{t(it)}</span>)}</div></div>))}
             </div>
           </Reveal>
+          {C.skills.studying && <Reveal><div className="bp-studying">{t(C.skills.studying)}</div></Reveal>}
           <Reveal>
             <div className="bp-cert-band">
               <span className="bp-cert-band-label">★ {t(C.certs.bannerLabel)}</span>
@@ -437,7 +440,7 @@ function App() {
 
         {/* CONTACT */}
         <section id="contacto" className="bp-shell bp-section">
-          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.05</span><span className="ttl">{t(C.contact.label)}</span><span className="rule" /></div></Reveal>
+          <Reveal><div className="bp-sechead"><span className="bp-cross" /><span className="sec">SEC.05</span><h2 className="ttl">{t(C.contact.label)}</h2><span className="rule" /></div></Reveal>
           <Reveal>
             <h2 className="bp-contact-h">{(() => { const w = t(C.contact.headline).split(" "); return (<React.Fragment>{w.slice(0,-1).join(" ")} <span className="em">{w.slice(-1)}</span></React.Fragment>); })()}</h2>
             <p className="bp-contact-sub">{t(C.contact.blurb)}</p>

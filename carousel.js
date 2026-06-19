@@ -54,7 +54,8 @@
   function Carousel({
     images,
     badge,
-    tag
+    tag,
+    name
   }) {
     const [i, setI] = useState(0);
     const n = images.length;
@@ -99,7 +100,7 @@
       key: k
     }, /*#__PURE__*/React.createElement("img", {
       src: src,
-      alt: `${tag || "imagen"} ${k + 1}`,
+      alt: `${name ? name + " — " : ""}${tag || "imagen"} ${k + 1}`,
       draggable: "false",
       loading: "lazy"
     })))), badge && /*#__PURE__*/React.createElement("span", {

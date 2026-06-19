@@ -110,7 +110,7 @@ const CSS = `
 .bp-cross::before { left: 50%; top: 0; bottom: 0; width: 1px; transform: translateX(-50%); }
 .bp-cross::after { top: 50%; left: 0; right: 0; height: 1px; transform: translateY(-50%); }
 .bp-sechead .sec { font-family: var(--mono); font-size: 12px; color: var(--acc); letter-spacing: 1px; }
-.bp-sechead .ttl { font-family: var(--mono); font-size: 12px; color: var(--fg-dim); letter-spacing: 2px; text-transform: uppercase; }
+.bp-sechead .ttl { font-family: var(--mono); font-size: 12px; font-weight: 400; color: var(--fg-dim); letter-spacing: 2px; text-transform: uppercase; }
 .bp-sechead .rule { flex: 1; height: 1px; background: var(--line); }
 .bp-sechead .coord { font-family: var(--mono); font-size: 11px; color: var(--fg-faint); }
 
@@ -224,6 +224,7 @@ const CSS = `
 .bp-chips { display: flex; flex-wrap: wrap; gap: 8px; }
 .bp-chip { font-family: var(--mono); font-size: 12.5px; color: var(--fg); border: 1px solid var(--line); padding: 8px 13px; transition: .2s; }
 .bp-chip:hover { border-color: var(--acc); color: var(--acc); }
+.bp-skills-intro { color: var(--fg-dim); font-size: 15px; margin-bottom: 28px; max-width: 52ch; }
 .bp-studying { margin-top: 28px; font-family: var(--mono); font-size: 13.5px; color: var(--acc); border: 1px solid var(--acc); padding: 16px 20px; display: flex; gap: 12px; align-items: center; background: var(--acc-soft); }
 .bp-studying::before { content:"▸"; }
 
@@ -322,7 +323,8 @@ function Feature({
   }, p.images ? /*#__PURE__*/React.createElement(Carousel, {
     images: p.images,
     badge: p.status ? t(p.status) : null,
-    tag: t(p.imageLabel)
+    tag: t(p.imageLabel),
+    name: t(p.name)
   }) : /*#__PURE__*/React.createElement("div", {
     className: "bp-media-frame"
   }, /*#__PURE__*/React.createElement("span", {
@@ -486,7 +488,7 @@ function App() {
     className: "bp-cross"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sec"
-  }, "SEC.01"), /*#__PURE__*/React.createElement("span", {
+  }, "SEC.01"), /*#__PURE__*/React.createElement("h2", {
     className: "ttl"
   }, t(C.analytic.label)), /*#__PURE__*/React.createElement("span", {
     className: "rule"
@@ -518,7 +520,7 @@ function App() {
     className: "bp-cross"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sec"
-  }, "SEC.02"), /*#__PURE__*/React.createElement("span", {
+  }, "SEC.02"), /*#__PURE__*/React.createElement("h2", {
     className: "ttl"
   }, lang === "es" ? "Proyectos seleccionados" : "Selected work"), /*#__PURE__*/React.createElement("span", {
     className: "rule"
@@ -538,7 +540,7 @@ function App() {
     className: "bp-cross"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sec"
-  }, "SEC.03"), /*#__PURE__*/React.createElement("span", {
+  }, "SEC.03"), /*#__PURE__*/React.createElement("h2", {
     className: "ttl"
   }, t(C.about.label)), /*#__PURE__*/React.createElement("span", {
     className: "rule"
@@ -587,13 +589,15 @@ function App() {
     className: "bp-cross"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sec"
-  }, "SEC.04"), /*#__PURE__*/React.createElement("span", {
+  }, "SEC.04"), /*#__PURE__*/React.createElement("h2", {
     className: "ttl"
   }, t(C.skills.label)), /*#__PURE__*/React.createElement("span", {
     className: "rule"
   }), /*#__PURE__*/React.createElement("span", {
     className: "coord"
-  }, secCoord(4)))), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+  }, secCoord(4)))), C.skills.intro && /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("p", {
+    className: "bp-skills-intro"
+  }, t(C.skills.intro))), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
     className: "bp-skill-groups"
   }, C.skills.groups.map((g, i) => /*#__PURE__*/React.createElement("div", {
     className: "bp-skill-g",
@@ -603,7 +607,9 @@ function App() {
   }, g.items.map((it, k) => /*#__PURE__*/React.createElement("span", {
     className: "bp-chip",
     key: k
-  }, t(it)))))))), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+  }, t(it)))))))), C.skills.studying && /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
+    className: "bp-studying"
+  }, t(C.skills.studying))), /*#__PURE__*/React.createElement(Reveal, null, /*#__PURE__*/React.createElement("div", {
     className: "bp-cert-band"
   }, /*#__PURE__*/React.createElement("span", {
     className: "bp-cert-band-label"
@@ -632,7 +638,7 @@ function App() {
     className: "bp-cross"
   }), /*#__PURE__*/React.createElement("span", {
     className: "sec"
-  }, "SEC.05"), /*#__PURE__*/React.createElement("span", {
+  }, "SEC.05"), /*#__PURE__*/React.createElement("h2", {
     className: "ttl"
   }, t(C.contact.label)), /*#__PURE__*/React.createElement("span", {
     className: "rule"

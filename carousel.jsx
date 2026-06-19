@@ -49,7 +49,7 @@
     document.head.appendChild(s);
   }
 
-  function Carousel({ images, badge, tag }) {
+  function Carousel({ images, badge, tag, name }) {
     const [i, setI] = useState(0);
     const n = images.length;
     const drag = useRef({ x: 0, active: false, moved: 0 });
@@ -72,7 +72,7 @@
           <div className="aa-car-track" style={{ transform: `translateX(${-i * 100}%)` }}>
             {images.map((src, k) => (
               <div className="aa-car-slide" key={k}>
-                <img src={src} alt={`${tag || "imagen"} ${k + 1}`} draggable="false" loading="lazy" />
+                <img src={src} alt={`${name ? name + " — " : ""}${tag || "imagen"} ${k + 1}`} draggable="false" loading="lazy" />
               </div>
             ))}
           </div>
