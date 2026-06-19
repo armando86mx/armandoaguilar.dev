@@ -191,7 +191,7 @@ const CSS = `
 .bp-pbtn .s { color: var(--fg-faint); }
 .bp-feat-media { position: relative; }
 .bp-media-frame { border: 1px solid var(--line); background: var(--panel); overflow: hidden; position: relative; }
-.bp-media-frame img { width: 100%; display: block; }
+.bp-media-frame img { width: 100%; height: auto; display: block; }
 .bp-media-frame .tag { position: absolute; top: 11px; left: 11px; z-index: 3; font-family: var(--mono); font-size: 10px; letter-spacing: .05em; text-transform: uppercase; background: var(--acc); color: var(--bg); padding: 4px 9px; }
 
 /* about */
