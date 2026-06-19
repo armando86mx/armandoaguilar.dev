@@ -459,7 +459,7 @@ function App() {
   }, /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("span", null, "~/armando \u2014 id")), /*#__PURE__*/React.createElement("div", {
     className: "bp-photo-img"
   }, /*#__PURE__*/React.createElement("img", {
-    src: "/assets/yo.webp",
+    src: "/assets/armando-aguilar.webp",
     alt: "Armando Aguilar",
     width: "600",
     height: "675"

@@ -350,7 +350,7 @@ function App() {
               <div className="bp-photo-card">
                 <div className="bp-photo-bar"><i/><i/><i/><span>~/armando — id</span></div>
                 <div className="bp-photo-img">
-                  <img src="/assets/yo.webp" alt="Armando Aguilar" width="600" height="675" />
+                  <img src="/assets/armando-aguilar.webp" alt="Armando Aguilar" width="600" height="675" />
                   <div className="bp-photo-meta"><span className="who"><b>●</b> {t(C.hero.photoCaption)}</span></div>
                 </div>
               </div>

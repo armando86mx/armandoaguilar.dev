@@ -187,7 +187,7 @@ window.CONTENT = {
       },
     ],
     photoLabel: { es: "Tu foto aquí", en: "Your photo here" },
-    photo: "/assets/yo-about.webp",
+    photo: "/assets/armando-aguilar-about.webp",
   },
 
   skills: {
