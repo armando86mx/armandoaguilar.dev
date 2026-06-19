@@ -336,7 +336,7 @@ function Feature({
   })))));
 }
 function App() {
-  const [lang, setLang] = usePersisted("aa_lang", "es");
+  const [lang] = useState(/^\/en(\/|$)/.test(location.pathname) ? "en" : "es");
   const [theme, setTheme] = usePersisted("aa_theme", "dark");
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("inicio");
@@ -393,9 +393,9 @@ function App() {
     className: `bp-navlink ${active === n.id ? "active" : ""}`
   }, t(n)))), /*#__PURE__*/React.createElement("div", {
     className: "bp-ctrls"
-  }, /*#__PURE__*/React.createElement("button", {
-    className: "bp-tg",
-    onClick: () => setLang(lang === "es" ? "en" : "es"),
+  }, /*#__PURE__*/React.createElement("a", {
+    className: "bp-tg bp-tg-lang",
+    href: lang === "es" ? "/en/" : "/",
     "aria-label": lang === "es" ? "Switch to English" : "Cambiar a español"
   }, /*#__PURE__*/React.createElement("span", {
     className: lang === "es" ? "on" : ""
@@ -459,7 +459,7 @@ function App() {
   }, /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("i", null), /*#__PURE__*/React.createElement("span", null, "~/armando \u2014 id")), /*#__PURE__*/React.createElement("div", {
     className: "bp-photo-img"
   }, /*#__PURE__*/React.createElement("img", {
-    src: "assets/yo.webp",
+    src: "/assets/yo.webp",
     alt: "Armando Aguilar",
     width: "600",
     height: "675"

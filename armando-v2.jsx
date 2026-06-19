@@ -284,7 +284,7 @@ function Feature({ p, i, t }) {
 }
 
 function App() {
-  const [lang, setLang] = usePersisted("aa_lang", "es");
+  const [lang] = useState(/^\/en(\/|$)/.test(location.pathname) ? "en" : "es");
   const [theme, setTheme] = usePersisted("aa_theme", "dark");
   const [scrolled, setScrolled] = useState(false);
   const [active, setActive] = useState("inicio");
@@ -318,7 +318,7 @@ function App() {
             {C.nav.map((n)=><a key={n.id} href={`#${n.id}`} className={`bp-navlink ${active===n.id?"active":""}`}>{t(n)}</a>)}
           </div>
           <div className="bp-ctrls">
-            <button className="bp-tg" onClick={()=>setLang(lang==="es"?"en":"es")} aria-label={lang==="es"?"Switch to English":"Cambiar a español"}><span className={lang==="es"?"on":""}>ES</span>/<span className={lang==="en"?"on":""}>EN</span></button>
+            <a className="bp-tg bp-tg-lang" href={lang==="es"?"/en/":"/"} aria-label={lang==="es"?"Switch to English":"Cambiar a español"}><span className={lang==="es"?"on":""}>ES</span>/<span className={lang==="en"?"on":""}>EN</span></a>
             <button className="bp-tg" onClick={()=>setTheme(theme==="dark"?"light":"dark")} aria-label={lang==="es"?(theme==="dark"?"Activar modo claro":"Activar modo oscuro"):(theme==="dark"?"Switch to light mode":"Switch to dark mode")}>{theme==="dark"?"☾":"☀"}</button>
             <button className="bp-burger" onClick={()=>setMenuOpen((o)=>!o)} aria-label={lang==="es"?"Menú":"Menu"} aria-expanded={menuOpen}>{menuOpen?"✕":"☰"}</button>
           </div>
@@ -350,7 +350,7 @@ function App() {
               <div className="bp-photo-card">
                 <div className="bp-photo-bar"><i/><i/><i/><span>~/armando — id</span></div>
                 <div className="bp-photo-img">
-                  <img src="assets/yo.webp" alt="Armando Aguilar" width="600" height="675" />
+                  <img src="/assets/yo.webp" alt="Armando Aguilar" width="600" height="675" />
                   <div className="bp-photo-meta"><span className="who"><b>●</b> {t(C.hero.photoCaption)}</span></div>
                 </div>
               </div>
